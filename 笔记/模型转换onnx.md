@@ -262,3 +262,9 @@ with torch.no_grad():
                                             }
                                )
 ```
+# onnx优化
+
+```
+pip install onnx-simplifier  
+python -m onnxsim stella_v2.onnx stella_v2_sim.onnx
+```
