@@ -262,7 +262,7 @@ with torch.no_grad():
                                             }
                                )
 ```
-# onnx优化
+# onnx简化
 
 ```
 pip install onnx-simplifier  
