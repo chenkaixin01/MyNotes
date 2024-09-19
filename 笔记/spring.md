@@ -94,23 +94,7 @@ Spring解决循环依赖主要是依赖三级缓存，但是的**在调用构造
 - JDK代理使用的是反射机制实现aop的动态代理，CGLib代理使用字节码处理框架ASM，通过修改字节码生成子类。所以jdk动态代理的方式创建代理对象效率较高，执行效率较低，CGLib创建效率较低，执行效率高。
 - JDK动态代理机制是委托机制，具体说动态实现接口类，在动态生成的实现类里面委托hanlder去调用原始实现类方法，CGLib则使用的继承机制，具体说被代理类和代理类是继承关系，所以代理类是可以赋值给被代理类的，如果被代理类有接口，那么代理类也可以赋值给接口。
 
-# 自动装配
 
-**通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。**
-
-SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的`META-INF/spring.factories`文件，将文件中配置的类型信息加载到 Spring 容器
-
-## 如何实现自动装配
-
-`@SpringBootApplication`看作是 `@Configuration`、`@EnableAutoConfiguration`、`@ComponentScan` 注解的集合
-
-- `@EnableAutoConfiguration`：启用 SpringBoot 的自动配置机制
-- `@Configuration`：允许在上下文中注册额外的 bean 或导入其他配置类
-- `@ComponentScan`：扫描被`@Component` (`@Service`,`@Controller`)注解的 bean，注解默认会扫描启动类所在的包下所有的类 ，可以自定义不扫描某些 bean。如下图所示，容器中将排除`TypeExcludeFilter`和`AutoConfigurationExcludeFilter`。
-
-### @EnableAutoConfiguration:实现自动装配的核心注解
-
-AutoConfigurationImportSelector的importselect方法会获取所有需要自动装配的配置类，扫描spring.factories；获取后再根据condition条件进行筛选，符合条件的才进行加载
 
 # Spring事务
 
@@ -157,3 +141,30 @@ Spring 框架中，事务管理相关最重要的 3 个接口如下：
 4. 异常未抛出
 
 5. 异常不匹配
+
+# SpringBoot
+spring Boot 是 Spring 开源组织下的子项目，是 Spring 组件一站式解决方案，主要是简化了使用 Spring 的难度，简省了繁重的配置，提供了各种启动器，开发者能快速上手。
+
+- 用来简化Spring应用的初始搭建以及开发过程，使用特定的方式来进行配置
+- 创建独立的Spring引用程序main方法运行
+- 嵌入的tomcat无需部署war文件
+- 简化maven配置
+- 自动配置Spring添加对应的功能starter自动化配置
+- SpringBoot来简化Spring应用开发，约定大于配置，去繁化简
+## 自动装配
+
+**通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。**
+
+SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的`META-INF/spring.factories`文件，将文件中配置的类型信息加载到 Spring 容器
+
+### 如何实现自动装配
+
+`@SpringBootApplication`看作是 `@Configuration`、`@EnableAutoConfiguration`、`@ComponentScan` 注解的集合
+
+- `@EnableAutoConfiguration`：启用 SpringBoot 的自动配置机制
+- `@Configuration`：允许在上下文中注册额外的 bean 或导入其他配置类
+- `@ComponentScan`：扫描被`@Component` (`@Service`,`@Controller`)注解的 bean，注解默认会扫描启动类所在的包下所有的类 ，可以自定义不扫描某些 bean。如下图所示，容器中将排除`TypeExcludeFilter`和`AutoConfigurationExcludeFilter`。
+
+### @EnableAutoConfiguration:实现自动装配的核心注解
+
+AutoConfigurationImportSelector的importselect方法会获取所有需要自动装配的配置类，扫描spring.factories；获取后再根据condition条件进行筛选，符合条件的才进行加载
