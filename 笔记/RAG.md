@@ -27,3 +27,5 @@ https://luxiangdong.com/2024/01/24/cut80off/
 
 - 残差连接（Residual Connection）和层归一化（Layer Normalization）：在Transformer的每个子层中都使用了残差连接和层归一化，以帮助模型更容易地训练和优化。
 Transformer模型通过自注意力机制和前馈神经网络来处理输入序列，并通过堆叠多个层来逐步提取输入序列中的特征。这使得Transformer在各种NLP任务中表现出色，如机器翻译、文本生成、语言建模等。
+
+# 微调
