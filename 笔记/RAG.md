@@ -28,4 +28,16 @@ https://luxiangdong.com/2024/01/24/cut80off/
 - 残差连接（Residual Connection）和层归一化（Layer Normalization）：在Transformer的每个子层中都使用了残差连接和层归一化，以帮助模型更容易地训练和优化。
 Transformer模型通过自注意力机制和前馈神经网络来处理输入序列，并通过堆叠多个层来逐步提取输入序列中的特征。这使得Transformer在各种NLP任务中表现出色，如机器翻译、文本生成、语言建模等。
 
-# 微调
+# 大模型推理
+## ollama
+Ollama是一个大模型运行框架，它对于llama.cpp做了封装，而llama.cpp是基于gguf张量库实现的一个推理引擎，gguf（GPT-Generated Unified Format）也用在其他结构模型中，例如stable-diffusion
+以下是 Ollama 的一些关键特点和功能：
+
+- 简化模型管理：Ollama 提供了一个简单的命令行界面，允许用户快速下载和运行各种预训练的语言模型。用户可以通过简单的命令来管理模型的版本和配置。
+- 本地运行：Ollama 支持在本地计算机上运行模型，避免了将数据上传到云端的需求。这对于保护隐私和数据安全尤为重要。
+- 支持多种模型：Ollama 可以支持多种不同的模型架构和框架，包括 OpenAI 的 GPT 系列、Google 的 BERT 等。用户可以根据需求选择适合的模型。
+- 易于集成：Ollama 的设计使其易于与现有的开发工具和工作流程集成。它可以与 Python、JavaScript 等编程语言一起使用，方便开发者将其嵌入到应用程序中。
+- 社区支持：作为一个开源项目，Ollama 拥有活跃的社区支持，用户可以参与开发、报告问题和贡献代码。
+- 灵活性和扩展性：Ollama 提供了灵活的 API 接口，用户可以根据特定需求进行扩展和定制。
+### llama.cpp
+llama.cpp是一个高性能大模型推理框架，使用C++编写，基于gguf张量库开发
