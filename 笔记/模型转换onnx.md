@@ -1,4 +1,4 @@
-# 初始化环境
++# 初始化环境
 
 ```
 conda create -n onnx python==3.10
