@@ -1,4 +1,4 @@
-# RAG流程
+# 1 RAG流程
 
 ![线程状态](https://luxiangdong.com/images/ragone/2.png)
 使用信息抽取模型提取用户问题关键信息，bert/gpt
@@ -6,19 +6,19 @@ selective_context
 压缩promt
 https://luxiangdong.com/2024/01/24/cut80off/
 
-# bert与gpt对比
-## 概念
+# 2 bert与gpt对比
+## 2.1 概念
 - Bert 基于transformer的编码器部分进行堆叠构建，通过预训练和微调两个阶段来生成深度的双向语言表征，
 - gpt基于transformer的解码器部分，通过回归语言模型预训练来学习生成连贯文本的能力
-## 上下文理解能力
+## 2.2 上下文理解能力
 
 - bert：由于采用了双向语言模型，bert能够同时考虑前后文信息，因此在理解整个句子或段落时表现出色。适用于需要整个文本的任务，如分类，命名实体识别和句子关系判断
 - gpt：作为单向模型，gpt在生成文本时只能依赖已生成的上文，因此在处理需要理解整个文本任务时可能表现不足。适用于生成式的NLP任务
  
-## transformer
+## 2.3 transformer
  Transformer是一种基于自注意力机制（self-attention mechanism）的模型，最初被提出用于处理序列到序列（sequence-to-sequence）的任务，例如机器翻译。它的核心思想是通过自注意力机制来直接捕捉输入序列中的各个位置之间的关系
 
-### 组件：
+### 2.3.1 组件：
 - 编码器（Encoder）：编码器由多个相同的层堆叠而成，每一层都包括自注意力机制和前馈神经网络（Feedforward Neural Network）。自注意力机制用于捕捉输入序列中各个位置之间的关系，而前馈神经网络则用于对每个位置的特征进行非线性变换。
 
 - 解码器（Decoder）：解码器也由多个相同的层堆叠而成，每一层也包括自注意力机制、编码器-解码器注意力机制和前馈神经网络。解码器的自注意力机制用于捕捉输出序列中各个位置之间的关系，编码器-解码器注意力机制用于将编码器的输出与解码器的输入进行关联。
@@ -28,8 +28,8 @@ https://luxiangdong.com/2024/01/24/cut80off/
 - 残差连接（Residual Connection）和层归一化（Layer Normalization）：在Transformer的每个子层中都使用了残差连接和层归一化，以帮助模型更容易地训练和优化。
 Transformer模型通过自注意力机制和前馈神经网络来处理输入序列，并通过堆叠多个层来逐步提取输入序列中的特征。这使得Transformer在各种NLP任务中表现出色，如机器翻译、文本生成、语言建模等。
 
-# 大模型推理
-## ollama
+# 3 大模型推理
+## 3.1 ollama
 Ollama是一个大模型运行框架，它对于llama.cpp做了封装，而llama.cpp是基于gguf张量库实现的一个推理引擎，gguf（GPT-Generated Unified Format）也用在其他结构模型中，例如stable-diffusion
 以下是 Ollama 的一些关键特点和功能：
 
@@ -39,5 +39,5 @@ Ollama是一个大模型运行框架，它对于llama.cpp做了封装，而llama
 - 易于集成：Ollama 的设计使其易于与现有的开发工具和工作流程集成。它可以与 Python、JavaScript 等编程语言一起使用，方便开发者将其嵌入到应用程序中。
 - 社区支持：作为一个开源项目，Ollama 拥有活跃的社区支持，用户可以参与开发、报告问题和贡献代码。
 - 灵活性和扩展性：Ollama 提供了灵活的 API 接口，用户可以根据特定需求进行扩展和定制。
-### llama.cpp
+### 3.1.1 llama.cpp
 llama.cpp是一个高性能大模型推理框架，使用C++编写，基于gguf张量库开发

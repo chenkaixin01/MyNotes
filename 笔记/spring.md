@@ -1,14 +1,14 @@
-# IOC
+# 1 IOC
 
 Ioc—Inversion of Control，即“控制反转”，不是什么技术，而是一种设计思想。在Java开发中，Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。
 
 有了IoC容器后，**把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是 松散耦合，这样也方便测试，利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活**。
 
-## DI是什么
+## 1.1 DI是什么
 
 DI—Dependency Injection，即依赖注入：组件之间依赖关系由容器在运行期决定，形象的说，即由容器动态的将某个依赖关系注入到组件之中。依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。
 
-## IOC的配置方式
+## 1.2 IOC的配置方式
 
 1. xml配置：太过繁琐，已放弃
 
@@ -16,15 +16,15 @@ DI—Dependency Injection，即依赖注入：组件之间依赖关系由容器�
 
 3. 注解配置：通过在类上加注解的方式，来声明一个类交给Spring管理，Spring会自动扫描带有@Component，@Controller，@RestController，@Service，@Repository这四个注解的类，然后帮我们创建并管理，前提是需要先配置Spring的注解扫描器。
 
-## 依赖注入方式
+## 1.3 依赖注入方式
 
 构造器注入与注解注入（@Autowired，@Resource）
 
-### 为什么推荐构造器注入
+### 1.3.1 为什么推荐构造器注入
 
 官方：这个构造器注入的方式**能够保证注入的组件不可变，并且确保需要的依赖不为空**。无法解决循环依赖问题
 
-### @Autowired，@Resource有什么区别
+### 1.3.2 @Autowired，@Resource有什么区别
 
 1、@Autowired是Spring自带的，@Resource是JSR250规范实现的，@Inject是JSR330规范实现的
 
@@ -34,13 +34,13 @@ DI—Dependency Injection，即依赖注入：组件之间依赖关系由容器�
 
 4、@Autowired如果需要按照名称匹配需要和@Qualifier一起使用，@Inject和@Named一起使用，@Resource则通过name进行指定
 
-# bean生命周期
+# 2 bean生命周期
 
  ![](https://img-blog.csdnimg.cn/20200224111702108.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1NjM0MTgx,size_16,color_FFFFFF,t_70)
 
  Spring会扫描指定包下面的Java类，然后根据Java类构建beanDefinition对象，然后再根据beanDefinition来创建Spring的bean.
 
-## getBean
+## 2.1 getBean
 
 - 解析bean的真正name，如果bean是工厂类，name前缀会加&，需要去掉
 - 无参单例先从缓存中尝试获取
@@ -53,7 +53,7 @@ DI—Dependency Injection，即依赖注入：组件之间依赖关系由容器�
   - 原型时
   - 根据bean的scope创建
 
-## 循环依赖
+## 2.2 循环依赖
 
 构造器注入形成的循环依赖： 也就是beanB需要在beanA的构造函数中完成初始化，beanA也需要在beanB的构造函数中完成初始化，这种情况的结果就是两个bean都不能完成初始化，循环依赖难以解决。
 
@@ -61,7 +61,7 @@ Spring解决循环依赖主要是依赖三级缓存，但是的**在调用构造
 
 注解方式调用的是无参构造器，允许先将对象放入缓存中等待引用
 
-## 生命周期
+## 2.3 生命周期
 
 1. 实例化前：spring从上下文或者注解扫描中获取待初始化的bean
 
@@ -75,20 +75,20 @@ Spring解决循环依赖主要是依赖三级缓存，但是的**在调用构造
 
 6. 销毁阶段：当spring容器关闭时，会调用所有Bean的销毁方法释放资源
 
-# AOP
+# 3 AOP
 
-## Spring AOP和AspectJ是什么关系
+## 3.1 Spring AOP和AspectJ是什么关系
 
 ![](https://img-blog.csdnimg.cn/img_convert/1715d0bbdca7aa277cfda80eef95336a.png)
 
 1. AspectJ是更强的AOP框架，是实际意义的**AOP标准**；
 2. SpringAOP只是使用了AspectJ风格的注解
 
-## 动态代理
+## 3.2 动态代理
 
 动态代理就是，在程序运行期，创建目标对象的代理对象，并对目标对象中的方法进行功能性增强的一种技术。
 
-### CGlib与jdk动态代理区别
+### 3.2.1 CGlib与jdk动态代理区别
 
 - JDK代理只能对实现接口的类生成代理；CGLib是针对类实现代理，对指定的类生成一个子类，并覆盖其中的方法，这种通过继承类的实现方式，不能代理final修饰的类。
 - JDK代理使用的是反射机制实现aop的动态代理，CGLib代理使用字节码处理框架ASM，通过修改字节码生成子类。所以jdk动态代理的方式创建代理对象效率较高，执行效率较低，CGLib创建效率较低，执行效率高。
@@ -96,13 +96,13 @@ Spring解决循环依赖主要是依赖三级缓存，但是的**在调用构造
 
 
 
-# Spring事务
+# 4 Spring事务
 
-#### [声明式事务管理](https://javaguide.cn/system-design/framework/spring/spring-transaction.html#%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86)
+#### 4.1.1.1 [声明式事务管理](https://javaguide.cn/system-design/framework/spring/spring-transaction.html#%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86)
 
 推荐使用（代码侵入性最小），实际是通过 AOP 实现（基于`@Transactional` 的全注解方式使用最多）。
 
-### [Spring 事务管理接口介绍](https://javaguide.cn/system-design/framework/spring/spring-transaction.html#spring-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D)
+### 4.1.2 [Spring 事务管理接口介绍](https://javaguide.cn/system-design/framework/spring/spring-transaction.html#spring-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D)
 
 Spring 框架中，事务管理相关最重要的 3 个接口如下：
 
@@ -110,7 +110,7 @@ Spring 框架中，事务管理相关最重要的 3 个接口如下：
 - **`TransactionDefinition`**：事务定义信息(事务隔离级别、传播行为、超时、只读、回滚规则)。
 - **`TransactionStatus`**：事务运行状态。
 
-### 事务传播行为
+### 4.1.3 事务传播行为
 
 **事务传播行为是为了解决业务层方法之间互相调用的事务问题**。
 
@@ -130,7 +130,7 @@ Spring 框架中，事务管理相关最重要的 3 个接口如下：
 
 - NESTED：nested，如果当前存在事务，就在嵌套事务内执行；如果当前没有事务，就创建一个新事物
 
-## 事务失效场景
+## 4.2 事务失效场景
 
 1. 自身调用
 
@@ -142,7 +142,7 @@ Spring 框架中，事务管理相关最重要的 3 个接口如下：
 
 5. 异常不匹配
 
-# SpringBoot
+# 5 SpringBoot
 spring Boot 是 Spring 开源组织下的子项目，是 Spring 组件一站式解决方案，主要是简化了使用 Spring 的难度，简省了繁重的配置，提供了各种启动器，开发者能快速上手。
 
 - 用来简化Spring应用的初始搭建以及开发过程，使用特定的方式来进行配置
@@ -151,13 +151,13 @@ spring Boot 是 Spring 开源组织下的子项目，是 Spring 组件一站式�
 - 简化maven配置
 - 自动配置Spring添加对应的功能starter自动化配置
 - SpringBoot来简化Spring应用开发，约定大于配置，去繁化简
-## 自动装配
+## 5.1 自动装配
 
 **通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。**
 
 SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的`META-INF/spring.factories`文件，将文件中配置的类型信息加载到 Spring 容器
 
-### 如何实现自动装配
+### 5.1.1 如何实现自动装配
 
 `@SpringBootApplication`看作是 `@Configuration`、`@EnableAutoConfiguration`、`@ComponentScan` 注解的集合
 
@@ -165,6 +165,6 @@ SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启�
 - `@Configuration`：允许在上下文中注册额外的 bean 或导入其他配置类
 - `@ComponentScan`：扫描被`@Component` (`@Service`,`@Controller`)注解的 bean，注解默认会扫描启动类所在的包下所有的类 ，可以自定义不扫描某些 bean。如下图所示，容器中将排除`TypeExcludeFilter`和`AutoConfigurationExcludeFilter`。
 
-### @EnableAutoConfiguration:实现自动装配的核心注解
+### 5.1.2 @EnableAutoConfiguration:实现自动装配的核心注解
 
 AutoConfigurationImportSelector的importselect方法会获取所有需要自动装配的配置类，扫描spring.factories；获取后再根据condition条件进行筛选，符合条件的才进行加载

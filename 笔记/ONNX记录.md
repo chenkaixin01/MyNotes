@@ -1,17 +1,17 @@
 
-# 什么是onnx
+# 1 什么是onnx
 开放神经网络交换（Open Neural Network Exchange）简称 ONNX 是微软和 Facebook 提出用来表示深度学习模型的**开放**格式。所谓开放就是 ONNX 定义了一组和环境，平台均无关的标准格式，来增强各种 AI 模型的可交互性。
-# ProtoBuf
+# 2 ProtoBuf
 ONNX 使用的是 Protobuf 这个序列化数据结构去存储神经网络的权重信息。
 Protobuf 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API（摘自官方介绍）。
 
-## ProtoBuf与xml，json比较
+## 2.1 ProtoBuf与xml，json比较
 [深入ProtoBuf](https://www.jianshu.com/p/a24c88c0526a)
 
 - XML、JSON、ProtoBuf 都具有**数据结构化**和**数据序列化**的能力
 - XML、JSON 更注重**数据结构化**，关注人类可读性和语义表达能力。ProtoBuf 更注重**数据序列化**，关注效率、空间、速度，人类可读性差，语义表达能力不足（为保证极致的效率，会舍弃一部分元信息）
 - ProtoBuf 的应用场景更为明确，XML、JSON 的应用场景更为丰富。
-# onnx结构
+# 3 onnx结构
 
 核心对象有以下
 - `ModelProto`

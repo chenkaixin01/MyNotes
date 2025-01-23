@@ -8,7 +8,7 @@ pip install optimum[exporters-tf]
 pip install optimum[onnxruntime]
 ```
 
-# 通过optimum-cli转换onnx
+# 1 通过optimum-cli转换onnx
 
 [Export a model to ONNX with optimum.exporters.onnx](https://hf-mirror.com/docs/optimum/main/en/exporters/onnx/usage_guides/export_a_model#exporting-a-model-to-onnx-using-the-cli)
 
@@ -16,9 +16,9 @@ pip install optimum[onnxruntime]
 optimum-cli export onnx --model infgrad/stella-large-zh-v2 --task feature-extraction infgrad/stella-large-zh-v2-onnx/# python代码转换onnx
 ```
 
-# 通过代码转换
+# 2 通过代码转换
 
-## 确认模型输入参数
+## 2.1 确认模型输入参数
 
 ```
 import os
@@ -30,7 +30,7 @@ inputs = tokenizer("This framework generates embeddings for each input sentence"
 print(inputs)
 ```
 
-## 自定义模型包装，将onnx的输入输出包装成我们想要的
+## 2.2 自定义模型包装，将onnx的输入输出包装成我们想要的
 
 ```
 class MyEmbeddingModel(torch.nn.Module):
@@ -112,7 +112,7 @@ torch.onnx.export(
 )
 ```
 
-# 模型验证
+# 3 模型验证
 
 ```
 from transformers import AutoTokenizer
@@ -153,7 +153,7 @@ sum_diff = sum(diffList)
 print(sum_diff)
 ```
 
-# 模型参数调整示例
+# 4 模型参数调整示例
 
 ```
 import torch
@@ -262,7 +262,7 @@ with torch.no_grad():
                                             }
                                )
 ```
-# onnx简化
+# 5 onnx简化
 
 ```
 pip install onnx-simplifier  
