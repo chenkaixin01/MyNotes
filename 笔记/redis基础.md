@@ -367,6 +367,8 @@ Redis 4.0 带来了一个新的持久化选项——混合持久化。
 
 ## 5.2 big key 处理
 
+https://www.cnblogs.com/ivictor/p/18733235
+
 big key是指redis字符串类型占用内存过大或者非字符串类型元素数量过多
 
 - **造成问题**
